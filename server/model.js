@@ -1,14 +1,30 @@
 const Entries = require("./db");
 
-function getAll() {
-  return Entries.find({})
+async function getAll() {
+  return await Entries.find({});
 }
 
-function postEntry(entry){
+async function postEntry(entry) {
   const newEntry = new Entries(entry);
-  newEntry.save();
+  await newEntry.save();
 
   return newEntry;
 }
 
-module.exports = { getAll,postEntry };
+ async function updateFav(id) {
+
+  const entry =  await Entries.findById(id);
+  const value= entry.favourite
+
+
+  Entries.findByIdAndUpdate(
+    id,
+    { $set: { favourite: !value } },
+    function (err, doc) {
+      if(err)console.log(err)
+    }
+  );
+  return await Entries.find();
+}
+
+module.exports = { getAll, postEntry, updateFav };

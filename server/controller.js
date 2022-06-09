@@ -39,5 +39,17 @@ async function postEntry(req,res){
   }
 }
 
+async function updateFav(req,res){
+  try {
+    const id = req.params.id;
+    await model.updateFav(id)
 
-module.exports = { getAll,postEntry };
+    res.status(200);
+  } catch (error) {
+    res.send(error);
+    res.status(500);
+  }
+}
+
+
+module.exports = { getAll,postEntry,updateFav };
