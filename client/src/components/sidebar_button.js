@@ -1,9 +1,9 @@
 import './sidebar_button.css'
 
-const SidebarButton = ({name}) => {
+const SidebarButton = ({name,onClick}) => {
 
   return (
-    <button className='sideButton'>{name}</button>
+    <button className='sideButton' onClick={onClick} >{name}</button>
   );
 }
 
