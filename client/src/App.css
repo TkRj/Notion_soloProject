@@ -2,6 +2,6 @@
   display: flex;
 
 }
-.entryForm{
-/* display: none; */
+.entryList{
+  list-style: none;
 }

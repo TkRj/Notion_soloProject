@@ -5,6 +5,7 @@ const router= Router();
 
 
 router.get('/entries', controller.getAll)
+router.post('/entries',controller.postEntry)
 
 
 

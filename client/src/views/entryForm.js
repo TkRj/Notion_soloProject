@@ -1,11 +1,11 @@
 import './entryForm.css'
 
-const Entryform = () => {
+const Entryform = ({onSubmitHandler}) => {
 
   return (
     <div className='FORM'>
       <div>
-        <form className='form' >
+        <form className='form' onSubmit={onSubmitHandler} >
 
 
               <label className='label' >Title</label><br></br>

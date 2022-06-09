@@ -1,7 +1,7 @@
 import "./sidebar.css";
 import SidebarButton from './sidebar_button';
 
-const Sidebar = ({newEntryHandler,calenderHandler}) => {
+const Sidebar = ({newEntryHandler,allEntriesHandler,onSubmitHandler}) => {
 
 
   return (
@@ -9,7 +9,7 @@ const Sidebar = ({newEntryHandler,calenderHandler}) => {
       <div className="side-button-box">
 
       <SidebarButton name="New Entry" onClick={newEntryHandler} />
-      <SidebarButton name="Calender" onClick={calenderHandler} />
+      <SidebarButton name="All Entries" onClick={allEntriesHandler} />
       <SidebarButton name="Favourites" />
       <SidebarButton name="Images" />
       <SidebarButton name="Scheduler" />

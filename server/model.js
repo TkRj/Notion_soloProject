@@ -4,11 +4,11 @@ function getAll() {
   return Entries.find({})
 }
 
-// function postEvent(event){
-//   const newEvent = new Events(event);
-//   newEvent.save();
+function postEntry(entry){
+  const newEntry = new Entries(entry);
+  newEntry.save();
 
-//   return newEvent;
-// }
+  return newEntry;
+}
 
-module.exports = { getAll };
+module.exports = { getAll,postEntry };

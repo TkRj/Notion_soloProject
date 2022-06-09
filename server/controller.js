@@ -12,5 +12,32 @@ async function getAll(req, res) {
   }
 }
 
+async function postEntry(req,res){
+  try {
+    if (
+      req.body.title === "" ||
+      req.body.date === "" ||
+      req.body.entry === ""
+    ) {
+      res.status(400); //Bad request
+      const entries = await model.getAll();
+      res.send(entries);
+    } else {
+      const entry = req.body;
+      const newEntry = await model.postEntry(entry);
+      res.status(201);
 
-module.exports = { getAll };
+
+
+      const entries= await model.getAll()
+
+      res.send(entries);
+    }
+  } catch (error) {
+    res.send(error);
+    res.status(500);
+  }
+}
+
+
+module.exports = { getAll,postEntry };
