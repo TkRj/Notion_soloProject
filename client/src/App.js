@@ -11,9 +11,11 @@ import { postEntry,addAccount, getAllEntries } from "./utils/services";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import LoginForm from "./components/loginForm";
 import Navbar from "./components/navbar";
+
+
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {

@@ -19,8 +19,8 @@ const Entryform = ({onSubmitHandler}) => {
 
               <textarea name="entry"  placeholder='Write here..' autoComplete='off'></textarea><br></br>
               </div>
-              <SaveIcon className='save-icon'/>
-        <button id="createbtn" type="submit" >Save</button>
+
+        <button id="createbtn" type="submit" ><SaveIcon/></button>
       </form>
     </div>
 

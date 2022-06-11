@@ -1,0 +1,8 @@
+.icons-box{
+  display:flex;
+
+}
+.icons-outerbox{
+  display:flex;
+  justify-content: flex-end;
+}

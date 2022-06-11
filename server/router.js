@@ -1,15 +1,15 @@
-const controllerEntry = require('./controllers/controller.entry');
-const controllerLogin = require('./controllers/controller.login');
+const Entry = require('./controllers/controller.entry');
+const Login = require('./controllers/controller.login');
 const Router= require('express')
 const router= Router();
 
 
-router.post('/signup', controllerLogin.signup)
+router.post('/signup', Login.signup)
 
-router.get('/entries', controllerEntry.getAll)
-router.post('/entries',controllerEntry.postEntry)
-router.put('/entries/fav/:id',controllerEntry.updateFav)
-router.delete('/entries/fav/:id',controllerEntry.deleteEntry)
+router.get('/entries', Entry.getAll)
+router.post('/entries',Entry.postEntry)
+router.put('/entries/fav/:id',Entry.updateFav)
+router.delete('/entries/fav/:id',Entry.deleteEntry)
 
 
 
