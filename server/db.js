@@ -1,15 +1,29 @@
-const mongoose = require('mongoose');
-const Notion =mongoose.connect("mongodb://localhost:27017/Notion")
+const mongoose = require("mongoose");
+mongoose
+  .connect("mongodb://localhost:27017/Notion")
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Something went wrong", err));
 
 const EntrySchema = new mongoose.Schema(
   {
-    title:String,
-    date:Date,
-    entry:String,
-    favourite:Boolean,
-
-  },{collection:'Entry'}
+    title: String,
+    date: Date,
+    entry: String,
+    favourite: Boolean,
+  },
+  { collection: "Entry" }
 );
+
+const SignupSchema = new mongoose.Schema({
+  username: { type:String, required: true },
+  email:{ type:String, required: true },
+  password: { type:String, required: true },
+  date:{
+    type: Date,
+    default:Date.now
+  }
+
+});
 
 // const UserSchema = new mongoose.Schema(
 //   {
@@ -21,11 +35,7 @@ const EntrySchema = new mongoose.Schema(
 //   }
 // )
 
-const Entries = mongoose.model('Entries',EntrySchema);
+const Entries = mongoose.model("Entries", EntrySchema);
+const Signup = mongoose.model("Accounts", SignupSchema);
 
-const dataBase = mongoose.connection;
-
-dataBase.on("error", (err) => console.log(err));
-dataBase.once("connected", () => console.log("database connected"));
-
-module.exports = Entries;
+module.exports = {Entries,Signup};

@@ -1,5 +1,14 @@
 .navbar{
-  background-color:olivedrab;
+  background-color:#DAF7A6;
   width: 100vw;
   height: 10vh;
+}
+#logout-btn{
+ padding:.5em .5em;
+ margin-top:.5em;
+ margin-right:10em;
+  width: 4vw;
+  height: 6vh;
+
+  float:right;
 }

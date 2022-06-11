@@ -1,8 +1,18 @@
 import './navbar.css'
 
-const Navbar = () => {
+const Navbar = ({ setLoggedIn}) => {
+
+  function logoutHandler(e){
+    e.preventDefault();
+    //make a popup to confirm logout
+    setLoggedIn(false);
+
+  }
+
   return (
-    <div className='navbar'>Navbar</div>
+    <div className='navbar'>
+      <button id="logout-btn" onClick={logoutHandler} >Logout</button>
+    </div>
    );
 }
 

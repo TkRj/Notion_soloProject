@@ -1,0 +1,17 @@
+.label{
+  font-weight: 700;
+}
+
+.form-box{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+
+
+
+}
+.label{
+
+  margin:2px;
+}

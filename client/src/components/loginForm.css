@@ -1,0 +1,15 @@
+.form{
+  
+  height: 75vh;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+.input-container{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items: flex-start;
+  width:50%;
+  height:50%;
+}
