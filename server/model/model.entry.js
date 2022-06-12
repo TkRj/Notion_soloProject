@@ -26,7 +26,7 @@ async function updateFav(id) {
 }
 
 async function deleteEntry(id) {
-  const entry = await Entries.findByIdAndDelete(id);
+  await Entries.findByIdAndDelete(id);
 
   return await Entries.find({}).sort({date:-1});
 }

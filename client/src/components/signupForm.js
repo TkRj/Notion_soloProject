@@ -1,9 +1,9 @@
-import "./loginForm.css";
+import "./signupForm.css";
 
-const LoginForm = ({ BackHandler,LOGIN }) => {
+const SignupForm = ({ signUpHandler,loginHandler }) => {
   return (
     <div className="form">
-      <form onSubmit={LOGIN}>
+      <form onSubmit={signUpHandler}>
         <div className="input-container">
           <input
             type="text"
@@ -31,13 +31,22 @@ const LoginForm = ({ BackHandler,LOGIN }) => {
             required
           />
         </div>
-
+        <div className="input-container">
+          <input
+            type="password"
+            placeholder="Confirm Password.."
+            name="confirmPassword"
+            autoComplete="off"
+            required
+          />
+        </div>
         <div>
-          <input type="submit" value="Login" />
-          <button onClick={BackHandler}>Back</button>
+          <input type="submit" value="Sign Up" />
         </div>
       </form>
-
+        <div >
+          Already have an account? <a onClick={loginHandler}>Login</a>
+        </div>
 
 
 
@@ -45,4 +54,4 @@ const LoginForm = ({ BackHandler,LOGIN }) => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

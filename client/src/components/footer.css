@@ -1,5 +1,6 @@
 .footer{
-  background-color:DAF7A6;
+  background-color:#333;
   width: 100vw;
   height: 10vh;
+  position:fixed;
 }

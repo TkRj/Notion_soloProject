@@ -1,5 +1,6 @@
 import './entryForm.css'
 import SaveIcon from '@mui/icons-material/Save';
+import Button from '@mui/material/Button';
 const Entryform = ({onSubmitHandler}) => {
 
   return (
@@ -19,8 +20,8 @@ const Entryform = ({onSubmitHandler}) => {
 
               <textarea name="entry"  placeholder='Write here..' autoComplete='off'></textarea><br></br>
               </div>
-
-        <button id="createbtn" type="submit" ><SaveIcon/></button>
+        <Button variant="outlined" endIcon={<SaveIcon />} type="submit">SAVE</Button>
+        {/* <button id="createbtn" type="submit" ><SaveIcon/></button> */}
       </form>
     </div>
 

@@ -1,5 +1,6 @@
 import Entry from "./entry";
 
+
 const Favourites = ({ entries, setEntries }) => {
   return (
     <ul>

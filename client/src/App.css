@@ -1,16 +1,26 @@
+
 .App-wrapper{
   display: flex;
+  min-height: 80vh;
+  align-items: flex-start;
+
 
 }
 .entryList{
   list-style: none;
   border:1px solid black;
-  margin:5px;
-  padding:5px 10px;
-  border-radius: 5px;
+  margin:30px;
+  padding:0px;
+  border-radius: 10px;
+
 
 }
 .sidebar{
 display: flex;
 flex-direction: column;
+justify-content: flex-start;
+margin-top: 50px;
+padding-top: 20px;
+
+
 }

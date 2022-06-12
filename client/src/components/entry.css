@@ -7,3 +7,26 @@
   display:flex;
   justify-content: flex-end;
 }
+.title-time-box{
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  color:white;
+ margin-left: 0px;
+ margin-right:0px;
+}
+.entry-box{
+  padding:10px;
+  max-width: 20vw;
+  max-height: 30vh;
+}
+.entry-box:hover{
+max-width: 18vw;
+cursor: pointer;
+}
+.entry-body{
+  font-weight: 200;
+}
+.heart{
+  
+}

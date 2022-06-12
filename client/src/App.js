@@ -1,21 +1,29 @@
 import "./App.css";
+
 import Footer from "./components/footer";
 import Favourites from "./components/favEntries";
-
 import Entryform from "./components/entryForm";
 import SidebarButton from "./components/sidebar_button";
 import AllEntries from "./components/allEntries";
-
-import { useState, useEffect } from "react";
-import { postEntry, addAccount, getAllEntries } from "./utils/services";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import LoginForm from "./components/loginForm";
+import SignupForm from "./components/signupForm";
+import LoginForm from "./components/loginForm"
 import Navbar from "./components/navbar";
 
+
+import { useState, useEffect } from "react";
+import { postEntry, addAccount, checkEmail } from "./utils/services";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+
+
+
 function App() {
-  const [email, setEmail] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+
+  const [loggedIn, setLoggedIn] = useState(true);
   const [entries, setEntries] = useState([]);
+
+  const [ logging,setLogging ] = useState(false);
+  const [email, setEmail] = useState("");
+
 
   useEffect(() => {
     fetch("http://localhost:3001/entries")
@@ -49,7 +57,7 @@ function App() {
   //   setFavEntriesDisplay(true);
   function signUpHandler(e) {
     e.preventDefault();
-    //if username and password match, set login to true
+
     const user = {
       username: e.target.username.value,
       email: e.target.email.value,
@@ -57,8 +65,16 @@ function App() {
     };
 
   //if email exists in database, refuse signup
+    const email=e.target.email.value;
 
 
+   checkEmail(email).then(function(value){
+    const emailExists = value;
+    console.log(emailExists);
+
+    })
+
+    // console.log(emailExists);
   //check if password and confirmPassword matches
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
@@ -73,7 +89,22 @@ function App() {
       alert("Passwords do not match.\nPlease try again.");
     }
   }
-  function loginHandler(e) {}
+
+  function loginHandler(e) {
+    e.preventDefault();
+    setLogging(true);
+
+  }
+  function LOGIN(e){
+    e.preventDefault();
+    //If username,email & password matches in DB, allow login
+    //else redirect to signup
+   const user={
+    username:e.target.username.value,
+    email:e.target.email.value,
+    password:e.target.password.value
+   }
+  }
 
   function onSubmitHandler(e) {
     e.preventDefault();
@@ -94,12 +125,22 @@ function App() {
         setEntries(entries);
       })
       .catch((error) => console.log(error));
+     
+  }
+  function BackHandler(e){
+    e.preventDefault();
+    setLogging(false);
   }
 
-  //RENDER
-  if (!loggedIn) {
+
+  if(logging){
+      return (
+        <div><LoginForm BackHandler={BackHandler} setEmail={setEmail} LOGIN={LOGIN}/></div>
+      )
+    }
+ if (!loggedIn) {
     return (
-      <LoginForm loginHandler={loginHandler} signUpHandler={signUpHandler} />
+      <SignupForm loginHandler={loginHandler} signUpHandler={signUpHandler} />
     );
   }
 
@@ -107,11 +148,16 @@ function App() {
     <Router>
       <Navbar setLoggedIn={setLoggedIn} />
       <div className="App">
+
+
         <div className="App-wrapper">
           <div className="sidebar">
-            <Link to="/newEntry">
-              <SidebarButton name="new Entry" />
+
+          <Link to="/newEntry">
+              <SidebarButton  name="Create" />
             </Link>
+
+
             <Link to="/allEntries">
               <SidebarButton name="All Entries" />
             </Link>

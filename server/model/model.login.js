@@ -1,10 +1,7 @@
 const { Signup } = require("../db");
 const bcrypt = require("bcrypt");
 
-
-
-async function signup(res, newAccount) {
-
+async function signup(newAccount) {
   const saltPassword = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(newAccount.password, saltPassword);
 
@@ -15,8 +12,16 @@ async function signup(res, newAccount) {
   });
 
   SignedupUser.save()
-    .then(() =>  console.log("Account created"))
+    .then(() => console.log("Account created"))
     .catch((err) => console.log("Error! Account not created"));
 }
+async function checkEmail(Email) {
+  console.log('model',Email);
+    let doc = await Signup.findOne({ email: Email });
+    if (doc){
+      return true;
+    }else {return false;}
 
-module.exports = { signup };
+}
+
+module.exports = { signup, checkEmail };
