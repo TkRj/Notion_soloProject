@@ -7,15 +7,14 @@ import SidebarButton from "./components/sidebar_button";
 import AllEntries from "./components/allEntries";
 
 import { useState, useEffect } from "react";
-import { postEntry,addAccount, getAllEntries } from "./utils/services";
+import { postEntry, addAccount, getAllEntries } from "./utils/services";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import LoginForm from "./components/loginForm";
 import Navbar from "./components/navbar";
 
-
 function App() {
-
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [email, setEmail] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
@@ -48,18 +47,33 @@ function App() {
   //   setEntryFormDisplay(false);
   //   setAllEntriesDisplay(false);
   //   setFavEntriesDisplay(true);
-function loginHandler(e){
-  e.preventDefault();
-  //if username and password match, set login to true
-  const user={
-    username:e.target.username.value,
-    email:e.target.email.value,
-    password:e.target.password.value
-  }
-  addAccount(user);
-  setLoggedIn(true);
-}
+  function signUpHandler(e) {
+    e.preventDefault();
+    //if username and password match, set login to true
+    const user = {
+      username: e.target.username.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
 
+  //if email exists in database, refuse signup
+
+
+  //check if password and confirmPassword matches
+    const password = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
+
+    if (password === confirmPassword) {
+      addAccount(user);
+      setLoggedIn(true);
+      setEmail(email);
+    } else {
+      e.target.password.value = "";
+      e.target.confirmPassword.value=""
+      alert("Passwords do not match.\nPlease try again.");
+    }
+  }
+  function loginHandler(e) {}
 
   function onSubmitHandler(e) {
     e.preventDefault();
@@ -84,37 +98,52 @@ function loginHandler(e){
 
   //RENDER
   if (!loggedIn) {
-    return <LoginForm loginHandler={loginHandler}/>;
+    return (
+      <LoginForm loginHandler={loginHandler} signUpHandler={signUpHandler} />
+    );
   }
 
   return (
     <Router>
-      <Navbar  setLoggedIn={setLoggedIn}/>
-    <div className="App">
-       <div className="App-wrapper">
-        <div className="sidebar">
-          <Link to="/newEntry"><SidebarButton name ="new Entry"/></Link>
-          <Link to="/allEntries"><SidebarButton name ="All Entries"/></Link>
-          <Link to="/favourites"><SidebarButton name ="Favourites"/></Link>
-
+      <Navbar setLoggedIn={setLoggedIn} />
+      <div className="App">
+        <div className="App-wrapper">
+          <div className="sidebar">
+            <Link to="/newEntry">
+              <SidebarButton name="new Entry" />
+            </Link>
+            <Link to="/allEntries">
+              <SidebarButton name="All Entries" />
+            </Link>
+            <Link to="/favourites">
+              <SidebarButton name="Favourites" />
+            </Link>
+          </div>
+          <div>
+            <Routes>
+              <Route
+                path="/newEntry"
+                element={<Entryform onSubmitHandler={onSubmitHandler} />}
+              ></Route>
+              <Route
+                path="/allEntries"
+                element={
+                  <AllEntries entries={entries} setEntries={setEntries} />
+                }
+              ></Route>
+              <Route
+                path="/favourites"
+                element={
+                  <Favourites entries={entries} setEntries={setEntries} />
+                }
+              ></Route>
+            </Routes>
+          </div>
         </div>
-        <div>
-        <Routes>
-          <Route path="/newEntry"  element ={<Entryform onSubmitHandler={onSubmitHandler}/>} ></Route>
-          <Route path="/allEntries"  element ={<AllEntries entries={entries} setEntries={setEntries}/>} ></Route>
-          <Route path="/favourites"  element ={<Favourites entries={entries} setEntries ={setEntries}/>} ></Route>
-        </Routes>
+        <Footer />
       </div>
-    </div>
-      <Footer />
-    </div>
     </Router>
   );
 }
-
-
-
-
-
 
 export default App;

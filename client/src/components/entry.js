@@ -21,7 +21,7 @@ const Entry = ({entry,setEntries}) => {
 
   return (
     <div className='entry-box'>
-
+    
     {entry.title},<br></br>
     {entry.date},<br></br>
     {entry.entry}<br></br>

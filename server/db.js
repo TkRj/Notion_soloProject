@@ -18,6 +18,7 @@ const SignupSchema = new mongoose.Schema({
   username: { type:String, required: true },
   email:{ type:String, required: true },
   password: { type:String, required: true },
+  entries:[EntrySchema],
   date:{
     type: Date,
     default:Date.now
@@ -27,15 +28,13 @@ const SignupSchema = new mongoose.Schema({
 
 // const UserSchema = new mongoose.Schema(
 //   {
-//     firstName:String,
-//     lastName:String,
-//     email:String,
-//     password:String,
-//     entries:[EntrySchema]
+//     email: { type:String, required: true },
+
 //   }
 // )
 
 const Entries = mongoose.model("Entries", EntrySchema);
 const Signup = mongoose.model("Accounts", SignupSchema);
+
 
 module.exports = {Entries,Signup};

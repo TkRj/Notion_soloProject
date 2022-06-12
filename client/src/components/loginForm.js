@@ -1,37 +1,57 @@
-import './loginForm.css'
+import "./loginForm.css";
 
-
-const LoginForm = ({loginHandler}) => {
-
-
+const LoginForm = ({ signUpHandler,loginHandler }) => {
   return (
     <div className="form">
-     <form onSubmit={loginHandler}>
-       <div className="input-container">
-         <label>Username </label>
-         <input type="text" name="username" required />
+      <form onSubmit={signUpHandler}>
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="Username.."
+            name="username"
+            autoComplete="off"
+            required
+          />
+        </div>
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="Email.."
+            name="email"
+            autoComplete="off"
+            required
+          />
+        </div>
+        <div className="input-container">
+          <input
+            type="password"
+            placeholder="Password.."
+            name="password"
+            autoComplete="off"
+            required
+          />
+        </div>
+        <div className="input-container">
+          <input
+            type="password"
+            placeholder="Confirm Password.."
+            name="confirmPassword"
+            autoComplete="off"
+            required
+          />
+        </div>
+        <div>
+          <input type="submit" value="Sign Up" />
+        </div>
+      </form>
+      <form onSubmit={loginHandler} >
+        <div className="button-submit">
+          Already have an account? <input type="submit" value="Login" />
+        </div>
+      </form>
 
-       </div>
-       <div className="input-container">
-         <label>Email </label>
-         <input type="text" name="email" required />
-
-       </div>
-       <div className="input-container">
-         <label>Password </label>
-         <input type="password" name="password" required />
-
-       </div>
-       <div className="button-submit">
-         <input type="submit" value="Login"/>
-       </div>
-     <div >
-      <input type="submit" value="Sign Up"/>
-     </div>
-     </form>
-
-   </div>
-   );
-}
+    </div>
+  );
+};
 
 export default LoginForm;
