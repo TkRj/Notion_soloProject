@@ -1,14 +1,14 @@
 const { Signup } = require("../db");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 
 async function signup(newAccount) {
-  const saltPassword = await bcrypt.genSalt(10);
-  const hashPassword = await bcrypt.hash(newAccount.password, saltPassword);
+  // const saltPassword = await bcrypt.genSalt(10);
+  // const hashPassword = await bcrypt.hash(newAccount.password, saltPassword);
 
   const SignedupUser = new Signup({
     username: newAccount.username,
     email: newAccount.email,
-    password: hashPassword,
+    password: newAccount.password,
   });
 
   SignedupUser.save()
@@ -24,4 +24,14 @@ async function checkEmail(Email) {
 
 }
 
-module.exports = { signup, checkEmail };
+async function checkLogin(username,email,password) {
+  // const saltPassword = await bcrypt.genSalt(10);
+  // const hashPassword = await bcrypt.hash(password, saltPassword);
+ 
+  let doc = await Signup.findOne({ username: username, email: email,password: password });
+  if (doc){
+    return true;
+  }else{return false;}
+}
+
+module.exports = { signup, checkEmail,checkLogin };

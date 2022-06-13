@@ -58,7 +58,7 @@ function showalert(e){
 
     <div className="icons-outerbox">
       <div className="icons-box">
-        {!entry.favourite && <div>< FavoriteBorderSharpIcon onClick={(e)=>{updateEntries(updateFav(id))}} /></div>}
+        {!entry.favourite && <div >< FavoriteBorderSharpIcon onClick={(e)=>{updateEntries(updateFav(id))}} /></div>}
         {entry.favourite && <div>< FavoriteSharpIcon onClick={(e)=>{updateEntries(updateFav(id))}} /></div>}
         <div><DeleteIcon onClick={(e)=>{updateEntries(deleteEntry(id))}} /></div>
         <div><ShareIcon /></div>

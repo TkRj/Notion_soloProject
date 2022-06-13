@@ -11,14 +11,14 @@ import Navbar from "./components/navbar";
 
 
 import { useState, useEffect } from "react";
-import { postEntry, addAccount, checkEmail } from "./utils/services";
+import { postEntry, addAccount, checkEmail,checkLogin } from "./utils/services";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [entries, setEntries] = useState([]);
 
   const [ logging,setLogging ] = useState(false);
@@ -55,7 +55,7 @@ function App() {
   //   setEntryFormDisplay(false);
   //   setAllEntriesDisplay(false);
   //   setFavEntriesDisplay(true);
-  function signUpHandler(e) {
+ async function signUpHandler(e) {
     e.preventDefault();
 
     const user = {
@@ -67,14 +67,12 @@ function App() {
   //if email exists in database, refuse signup
     const email=e.target.email.value;
 
+  const emailExists = await checkEmail(email);
+  if(emailExists){
+    alert("Email already exists.\nPlease login.");
+    return;
+  }
 
-   checkEmail(email).then(function(value){
-    const emailExists = value;
-    console.log(emailExists);
-
-    })
-
-    // console.log(emailExists);
   //check if password and confirmPassword matches
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
@@ -95,16 +93,20 @@ function App() {
     setLogging(true);
 
   }
-  function LOGIN(e){
+  async function LOGIN(e){
     e.preventDefault();
+    const username=e.target.username.value;
+    const email=e.target.email.value;
+    const password=e.target.password.value;
     //If username,email & password matches in DB, allow login
-    //else redirect to signup
-   const user={
-    username:e.target.username.value,
-    email:e.target.email.value,
-    password:e.target.password.value
-   }
-  }
+    const loginExists = await checkLogin(username,email,password)
+    if(loginExists){
+      setLoggedIn(true);
+      setEmail(email);
+      setLogging(false);
+    }else{
+      setLogging(false);
+    }}
 
   function onSubmitHandler(e) {
     e.preventDefault();
@@ -125,7 +127,7 @@ function App() {
         setEntries(entries);
       })
       .catch((error) => console.log(error));
-     
+
   }
   function BackHandler(e){
     e.preventDefault();

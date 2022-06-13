@@ -6,6 +6,7 @@ const router= Router();
 
 router.post('/signup', Login.signup)
 router.post('/checkEmail', Login.checkEmail)
+router.post('/checkLogin', Login.checkLogin)
 
 router.get('/entries', Entry.getAll)
 router.post('/entries',Entry.postEntry)

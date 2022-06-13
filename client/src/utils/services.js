@@ -62,6 +62,17 @@ async function checkEmail(email) {
 
 
 }
+async function checkLogin(username,email,password){
+  return await fetch(`${BASE_URL}/checkLogin`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({username:username,email:email,password:password}),
+  })
+  .then((res) => res.json())
+  .catch((error) => console.log(error));
+}
 
 module.exports = {
   postEntry,
@@ -70,4 +81,5 @@ module.exports = {
   deleteEntry,
   addAccount,
   checkEmail,
+  checkLogin
 };

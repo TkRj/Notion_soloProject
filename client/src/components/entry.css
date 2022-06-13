@@ -20,13 +20,12 @@
   max-width: 20vw;
   max-height: 30vh;
 }
-.entry-box:hover{
-max-width: 18vw;
-cursor: pointer;
+.cursor{
+  cursor: pointer;
 }
 .entry-body{
   font-weight: 200;
 }
 .heart{
-  
+
 }

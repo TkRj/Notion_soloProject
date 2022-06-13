@@ -16,7 +16,7 @@ const Navbar = ({ setLoggedIn}) => {
 
   return (
     <div className="navbar">
-    <div className="brand-title">Journify</div>
+    <div className="brand-title">Notion</div>
     <div class="navbar-links">
       <ul>
         <li><a title="Home"><HomeIcon /></a></li>

@@ -17,6 +17,15 @@ async function checkEmail(req,res){
   res.status(200)
 }
 
+async function checkLogin(req,res){
+  const username = req.body.username
+  const email = req.body.email
+  const password = req.body.password
+
+  const checkLogin = await model.checkLogin(username,email,password)
+  res.send(checkLogin);
+  res.status(200)
+}
 
 
-module.exports={signup,checkEmail};
+module.exports={signup,checkEmail,checkLogin};
