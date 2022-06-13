@@ -34,7 +34,8 @@ const LoginForm = ({ BackHandler,LOGIN }) => {
 
         <div>
           <input type="submit" value="Login" />
-          <button onClick={BackHandler}>Back</button>
+        
+          <button onClick={BackHandler}>Sign Up</button>
         </div>
       </form>
 

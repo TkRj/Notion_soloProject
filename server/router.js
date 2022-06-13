@@ -9,6 +9,7 @@ router.post('/checkEmail', Login.checkEmail)
 router.post('/checkLogin', Login.checkLogin)
 
 router.get('/entries', Entry.getAll)
+//router.post('/entries/:email', Entry.getByEmail)
 router.post('/entries',Entry.postEntry)
 router.put('/entries/fav/:id',Entry.updateFav)
 router.delete('/entries/fav/:id',Entry.deleteEntry)

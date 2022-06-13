@@ -12,7 +12,7 @@ async function signup(req,res){
 async function checkEmail(req,res){
   const email = req.body.email
   const checkEmail = await model.checkEmail(email)
-  console.log('controller', checkEmail);
+  
   res.send(checkEmail);
   res.status(200)
 }

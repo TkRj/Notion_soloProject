@@ -1,12 +1,19 @@
-import {updateFav,deleteEntry} from '../utils/services'
-import ShareIcon from '@mui/icons-material/Share';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
-import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
-import './entry.css';
+import { useState } from "react";
+import "./entry.css";
+import { updateFav, deleteEntry } from "../utils/services";
+import FullEntry from "./fullEntry";
 
-const Entry = ({entry,setEntries}) => {
+import ShareIcon from "@mui/icons-material/Share";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
+import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
+import Backdrop from "@mui/material/Backdrop";
 
+
+
+
+const Entry = ({ entry, setEntries }) => {
+  const [open, setOpen] = useState(false);
   let id = entry._id;
   let date = entry.date.slice(8, 10);
   let month = Number(entry.date.slice(5, 7));
@@ -29,47 +36,84 @@ const Entry = ({entry,setEntries}) => {
     "Dec",
   ];
 
-  function updateEntries(promise){
-
-   promise.then(data=>{
-    setEntries(data);
-  }).catch(err=>{
-    console.log('Update or delete error',err);
-  })
+  function updateEntries(promise) {
+    promise
+      .then((data) => {
+        setEntries(data);
+      })
+      .catch((err) => {
+        console.log("Update or delete error", err);
+      });
   }
-function showalert(e){
-
-}
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
   return (
-    <div className='entry-box' onClick={showalert}>
-    <div>
-      <div className="title-time-box">
-        <div>{entry.title}</div>
-        <div>{date} {Months[month - 1]}</div>
+    <div className="entry-box">
+      <div>
+        <div className="title-time-box" onClick={handleToggle}>
+          <div>{entry.title}</div>
+          <div>
+            {date} {Months[month - 1]}
+          </div>
+        </div>
+        <div className="entry-body">{entry.entry.substring(0, 35)} </div>
       </div>
-      <div className='entry-body'>{entry.entry.substring(0,35)} </div>
 
-    </div>
+      <div>
+        <Backdrop
+          sx={{ bgcolor:'black',padding:10,color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          children={date + " " + Months[month - 1] + " " + year+" "+entry.entry}
+          transitionDuration={500}
+          open={open}
+          onClick={handleClose}
 
+        >
+          {/* <FullEntry entry={entry}/> */}
+        </Backdrop>
+      </div>
 
-
-
-
-    <div className="icons-outerbox">
-      <div className="icons-box">
-        {!entry.favourite && <div >< FavoriteBorderSharpIcon onClick={(e)=>{updateEntries(updateFav(id))}} /></div>}
-        {entry.favourite && <div>< FavoriteSharpIcon onClick={(e)=>{updateEntries(updateFav(id))}} /></div>}
-        <div><DeleteIcon onClick={(e)=>{updateEntries(deleteEntry(id))}} /></div>
-        <div><ShareIcon /></div>
+      <div className="icons-outerbox">
+        <div className="icons-box">
+          {!entry.favourite && (
+            <div>
+              <FavoriteBorderSharpIcon
+                onClick={(e) => {
+                  updateEntries(updateFav(id));
+                }}
+                cursor="pointer"
+              />
+            </div>
+          )}
+          {entry.favourite && (
+            <div>
+              <FavoriteSharpIcon
+                onClick={(e) => {
+                  updateEntries(updateFav(id));
+                }}
+                cursor="pointer"
+              />
+            </div>
+          )}
+          <div>
+            <DeleteIcon
+              onClick={(e) => {
+                updateEntries(deleteEntry(id));
+              }}
+              cursor="pointer"
+            />
+          </div>
+          <div>
+            <ShareIcon />
+          </div>
+        </div>
       </div>
     </div>
-
-
-
-
-   </div>
-   );
-}
+  );
+};
 
 export default Entry;

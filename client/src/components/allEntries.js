@@ -1,9 +1,10 @@
 import Entry from "./entry";
+import './allEntries.css'
 
 const AllEntries = ({entries,setEntries}) => {
   console.log('allentries',entries);
   return (
-    <ul>
+    <ul className="ul-box">
       {entries.map((entry) => {
         return (
           <li className="entryList" key={entry._id}>

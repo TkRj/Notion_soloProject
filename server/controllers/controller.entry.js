@@ -2,6 +2,7 @@ const model = require("../model/model.entry");
 
 async function getAll(req, res) {
   try {
+   
     const entries = await model.getAll();
     res.status(200);
 

@@ -5,12 +5,12 @@ import CallIcon from '@mui/icons-material/Call';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import HomeIcon from '@mui/icons-material/Home';
 
-const Navbar = ({ setLoggedIn}) => {
+const Navbar = ({ setLogging}) => {
 
   function logoutHandler(e){
     e.preventDefault();
     //make a popup to confirm logout
-    setLoggedIn(false);
+    setLogging(true);
 
   }
 

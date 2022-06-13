@@ -1,6 +1,6 @@
 const {Entries} = require("../db");
 
-async function getAll() {
+async function getAll(email) {
   return await Entries.find({}).sort({date:-1});
 }
 

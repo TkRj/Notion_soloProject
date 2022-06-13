@@ -16,7 +16,7 @@ async function signup(newAccount) {
     .catch((err) => console.log("Error! Account not created"));
 }
 async function checkEmail(Email) {
-  console.log('model',Email);
+ 
     let doc = await Signup.findOne({ email: Email });
     if (doc){
       return true;
@@ -27,7 +27,7 @@ async function checkEmail(Email) {
 async function checkLogin(username,email,password) {
   // const saltPassword = await bcrypt.genSalt(10);
   // const hashPassword = await bcrypt.hash(password, saltPassword);
- 
+
   let doc = await Signup.findOne({ username: username, email: email,password: password });
   if (doc){
     return true;
