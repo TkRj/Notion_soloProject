@@ -1,0 +1,16 @@
+.sideview-box{
+  display: flex;
+ flex-direction: column;
+ margin:30px;
+ padding: 10px;
+ /* border: solid; */
+ overflow: hidden;
+
+}
+.filler{
+  min-height: 3vh;
+}
+.title{
+  font-weight: 700;
+  font-size: large;
+}

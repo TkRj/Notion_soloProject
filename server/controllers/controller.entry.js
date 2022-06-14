@@ -2,7 +2,7 @@ const model = require("../model/model.entry");
 
 async function getAll(req, res) {
   try {
-   
+
     const entries = await model.getAll();
     res.status(200);
 
@@ -21,8 +21,7 @@ async function postEntry(req,res){
       req.body.entry === ""
     ) {
       res.status(400); //Bad request
-      const entries = await model.getAll();
-      res.send(entries);
+
     } else {
       const entry = req.body;
       const newEntry = await model.postEntry(entry);

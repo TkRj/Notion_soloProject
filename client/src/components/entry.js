@@ -1,19 +1,24 @@
 import { useState } from "react";
 import "./entry.css";
 import { updateFav, deleteEntry } from "../utils/services";
-import FullEntry from "./fullEntry";
 
 import ShareIcon from "@mui/icons-material/Share";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
+
 import Backdrop from "@mui/material/Backdrop";
 
+const Entry = ({
+  entry,
+  setEntries,
+  setSideView,
+  setSideViewEntry,
+  setSideViewFav,
+  setSideViewFavEntry,
+}) => {
+  // const [open, setOpen] = useState(false);
 
-
-
-const Entry = ({ entry, setEntries }) => {
-  const [open, setOpen] = useState(false);
   let id = entry._id;
   let date = entry.date.slice(8, 10);
   let month = Number(entry.date.slice(5, 7));
@@ -45,17 +50,28 @@ const Entry = ({ entry, setEntries }) => {
         console.log("Update or delete error", err);
       });
   }
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+  // const handleToggle = () => {
+  //   setOpen(!open);
+  // };
+
+  function sideViewHandler(e) {
+    e.preventDefault();
+    console.log("inside Sideview");
+    if (typeof setSideViewFav === "function") {
+      setSideViewFav(true);
+      setSideViewFavEntry(entry);
+    }else{
+    setSideView(true);
+    setSideViewEntry(entry);}
+  }
 
   return (
     <div className="entry-box">
       <div>
-        <div className="title-time-box" onClick={handleToggle}>
+        <div className="title-time-box" onClick={sideViewHandler}>
           <div>{entry.title}</div>
           <div>
             {date} {Months[month - 1]}
@@ -64,18 +80,18 @@ const Entry = ({ entry, setEntries }) => {
         <div className="entry-body">{entry.entry.substring(0, 35)} </div>
       </div>
 
-      <div>
+      {/* <div>
         <Backdrop
-          sx={{ bgcolor:'black',padding:10,color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          sx={{ bgcolor:'black',padding:50,color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
           children={date + " " + Months[month - 1] + " " + year+" "+entry.entry}
           transitionDuration={500}
           open={open}
           onClick={handleClose}
 
         >
-          {/* <FullEntry entry={entry}/> */}
+          <FullEntry entry={entry}/>
         </Backdrop>
-      </div>
+      </div> */}
 
       <div className="icons-outerbox">
         <div className="icons-box">
@@ -107,9 +123,7 @@ const Entry = ({ entry, setEntries }) => {
               cursor="pointer"
             />
           </div>
-          <div>
-            <ShareIcon />
-          </div>
+          <div>{/* <ShareIcon /> */}</div>
         </div>
       </div>
     </div>

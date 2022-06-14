@@ -1,32 +1,28 @@
-
-.icons-box{
-  display:flex;
-
+.icons-box {
+  display: flex;
 }
-.icons-outerbox{
-  display:flex;
+.icons-outerbox {
+  display: flex;
   justify-content: flex-end;
 }
-.title-time-box{
+.title-time-box {
   display: flex;
   justify-content: space-between;
   background-color: #333;
-  color:white;
- margin-left: 0px;
- margin-right:0px;
- cursor: pointer;
+  color: white;
+  margin-left: 0px;
+  margin-right: 0px;
+  cursor: pointer;
 }
-.entry-box{
-  padding:10px;
+.entry-box {
+  padding: 10px;
   max-width: 20vw;
   max-height: 30vh;
 }
-.cursor{
+.cursor {
   cursor: pointer;
 }
-.entry-body{
+.entry-body {
   font-weight: 200;
 }
-.heart{
 
-}

@@ -1,0 +1,17 @@
+.ul-box{
+  margin-top:10px;
+  /* border:1px solid black; */
+  max-height: 70vh;
+  overflow-y: scroll;
+ 
+}
+.allentries-mainbox{
+  display: flex;
+
+  justify-content: flex-start;
+  align-items: center;
+
+}
+.sideview{
+  margin-left: 10px;
+}

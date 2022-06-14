@@ -1,26 +1,19 @@
-
-.App-wrapper{
+.App-wrapper {
   display: flex;
   min-height: 80vh;
   align-items: flex-start;
-
-
 }
-.entryList{
+.entryList {
   list-style: none;
-  border:1px solid black;
-  margin:30px;
-  padding:0px;
+  border: 1px solid black;
+  margin: 30px;
+  padding: 0px;
   border-radius: 10px;
-
-
 }
-.sidebar{
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-margin-top: 50px;
-padding-top: 20px;
-
-
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 50px;
+  padding-top: 20px;
 }

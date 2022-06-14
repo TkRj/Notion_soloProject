@@ -20,11 +20,14 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [entries, setEntries] = useState([]);
-
   const [logging, setLogging] = useState(false);
   const [email, setEmail] = useState("");
 
+  const [entries, setEntries] = useState([]);
+  const [sideView, setSideView] = useState(false);
+  const [sideViewEntry, setSideViewEntry] = useState(null);
+  const [sideViewFav, setSideViewFav] = useState(false);
+  const [sideViewFavEntry, setSideViewFavEntry] = useState(null);
 
   useEffect(() => {
     //if email exists
@@ -32,31 +35,9 @@ function App() {
       .then((res) => res.json())
       .then((data) => setEntries(data))
       .catch((error) => console.log(error));
-  },[] );
+  }, []);
 
-  // const [entryFormDisplay, setEntryFormDisplay] = useState(false);
-  // const [allEntriesDisplay, setAllEntriesDisplay] = useState(false);
-  // const [favEntriesDisplay, setFavEntriesDisplay] = useState(false);
-  // //For new entry
-  // function newEntryHandler() {
-  //   setEntryFormDisplay(true);
-  //   setAllEntriesDisplay(false);
-  //   setFavEntriesDisplay(false);
-  // }
-  // //For All Entries display
-  // function allEntriesHandler() {
-  //   //turn only all entries display ON
-  //   setEntryFormDisplay(false);
-  //   setAllEntriesDisplay(true);
-  //   setFavEntriesDisplay(false);
 
-  //   getAllEntries().then((entries) => setEntries(entries));
-  // }
-  // //For all Favourites display
-  // function allFavHandler() {
-  //   setEntryFormDisplay(false);
-  //   setAllEntriesDisplay(false);
-  //   setFavEntriesDisplay(true);
   async function signUpHandler(e) {
     e.preventDefault();
 
@@ -113,39 +94,44 @@ function App() {
 
   function onSubmitHandler(e) {
     e.preventDefault();
-    let title=e.target.title.value;
-    let date=e.target.date.value;
-    let entry=e.target.entry.value;
+    let title = e.target.title.value;
+    let date = e.target.date.value;
+    let entry = e.target.entry.value;
     if (title && date && entry) {
-    const entry = {
-      title: e.target.title.value,
-      date: e.target.date.value,
-      entry: e.target.entry.value,
-      favourite: false,
-    };
+      const entry = {
+        title: e.target.title.value,
+        date: e.target.date.value,
+        entry: e.target.entry.value,
+        favourite: false,
+      };
 
-    //clear values
-    e.target.title.value = "";
-    e.target.date.value = "";
-    e.target.entry.value = "";
+      //clear values
+      e.target.title.value = "";
+      e.target.date.value = "";
+      e.target.entry.value = "";
 
-    postEntry(entry)
-      .then((entries) => {
-        console.log({entries})
-        setEntries(entries);
-      })
-      .catch((error) => console.log(error));
-    }else{
-      alert('Please fill in all fields');
+      postEntry(entry)
+        .then((entries) => {
+          console.log({ entries });
+          setEntries(entries);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      alert("Please fill in all fields");
       return;
     }
-
   }
-
 
   function BackHandler(e) {
     e.preventDefault();
     setLogging(false);
+  }
+  function sortHandler(e){
+    e.preventDefault();
+
+    setEntries(entries.sort((a,b)=>{
+      return new Date(a.date) - new Date(b.date);
+    }))
   }
 
   if (logging) {
@@ -167,7 +153,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar setLogging={setLogging}  />
+      <Navbar setLogging={setLogging} />
       <div className="App">
         <div className="App-wrapper">
           <div className="sidebar">
@@ -181,6 +167,7 @@ function App() {
             <Link to="/favourites">
               <SidebarButton name="Favourites" />
             </Link>
+            <button onClick={sortHandler}>Sort</button>
           </div>
           <div>
             <Routes>
@@ -191,13 +178,27 @@ function App() {
               <Route
                 path="/allEntries"
                 element={
-                  <AllEntries entries={entries} setEntries={setEntries} />
+                  <AllEntries
+                    entries={entries}
+                    setEntries={setEntries}
+                    sideView={sideView}
+                    setSideView={setSideView}
+                    sideViewEntry={sideViewEntry}
+                    setSideViewEntry={setSideViewEntry}
+                  />
                 }
               ></Route>
               <Route
                 path="/favourites"
                 element={
-                  <Favourites entries={entries} setEntries={setEntries} />
+                  <Favourites
+                    entries={entries}
+                    setEntries={setEntries}
+                    sideViewFav={sideViewFav}
+                    setSideViewFav={setSideViewFav}
+                    sideViewFavEntry={sideViewFavEntry}
+                    setSideViewFavEntry={setSideViewFavEntry}
+                  />
                 }
               ></Route>
             </Routes>

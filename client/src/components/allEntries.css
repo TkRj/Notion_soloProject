@@ -1,5 +1,17 @@
+.allentries-mainbox{
+  display: flex;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+
+}
 .ul-box{
   margin-top:10px;
-  /* border:1px solid black; */
+
   max-height: 70vh;
+  overflow-y: scroll;
+  min-width: 29.5vw;
+  max-width: 29.5vw;
 }
+
+
