@@ -11,9 +11,9 @@ const Favourites = ({
   setSideViewFavEntry,
 }) => {
   return (
-    <div className="favourites-mainbox">
+    <div className="allentries-mainbox">
       <div>
-        <ul>
+        <ul className="ul-box">
           {entries
             .filter((entry) => entry.favourite === true)
             .map((entry) => {
@@ -21,9 +21,11 @@ const Favourites = ({
                 <li className="entryList" key={entry._id}>
                   <Entry
                     entry={entry}
+                    entries={entries}
                     setEntries={setEntries}
                     setSideView={setSideView}
                     setSideViewFav={setSideViewFav}
+                    sideViewFavEntry={sideViewFavEntry}
                     setSideViewFavEntry={setSideViewFavEntry}
                   />
                 </li>
@@ -31,7 +33,7 @@ const Favourites = ({
             })}
         </ul>
       </div>
-      AAAA
+      
       {sideViewFav && <SideViewFav sideViewFavEntry={sideViewFavEntry} />}
     </div>
   );

@@ -11,10 +11,12 @@ import Backdrop from "@mui/material/Backdrop";
 
 const Entry = ({
   entry,
+  entries,
   setEntries,
   setSideView,
   setSideViewEntry,
   setSideViewFav,
+  sideViewFavEntry,
   setSideViewFavEntry,
 }) => {
   // const [open, setOpen] = useState(false);
@@ -45,7 +47,12 @@ const Entry = ({
     promise
       .then((data) => {
         setEntries(data);
-      })
+        let favEntries=data.filter((entry) => entry.favourite === true);
+        if( favEntries.includes(sideViewFavEntry)===false) {
+          if(sideViewFavEntry===entry||favEntries.length===0) {
+          setSideViewFav(false);
+        }
+  }})
       .catch((err) => {
         console.log("Update or delete error", err);
       });
@@ -59,13 +66,14 @@ const Entry = ({
 
   function sideViewHandler(e) {
     e.preventDefault();
-    console.log("inside Sideview");
+
     if (typeof setSideViewFav === "function") {
       setSideViewFav(true);
       setSideViewFavEntry(entry);
-    }else{
-    setSideView(true);
-    setSideViewEntry(entry);}
+    } else {
+      setSideView(true);
+      setSideViewEntry(entry);
+    }
   }
 
   return (
