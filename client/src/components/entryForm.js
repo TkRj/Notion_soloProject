@@ -3,6 +3,9 @@ import { useState } from "react";
 import SaveIcon from "@mui/icons-material/Save";
 import Button from "@mui/material/Button";
 import EmojiObjectsTwoToneIcon from "@mui/icons-material/EmojiObjectsTwoTone";
+import CancelIcon from '@mui/icons-material/Cancel';
+
+
 const Entryform = ({ onSubmitHandler }) => {
   // const [prompt, setPrompt] = useState(false);
   const [promptMessage, setPromptMessage] = useState("");
@@ -56,7 +59,7 @@ const Entryform = ({ onSubmitHandler }) => {
           {promptMessage ? (
             <span>
               {promptMessage}{" "}
-              <button onClick={() => setPromptMessage("")}>Off</button>
+              <CancelIcon onClick={() => setPromptMessage("")} cursor="pointer"/>
             </span>
           ) : (
             ""
@@ -71,7 +74,7 @@ const Entryform = ({ onSubmitHandler }) => {
           ></textarea>
           <br></br>
         </div>
-        <Button variant="outlined" endIcon={<SaveIcon />} type="submit">
+        <Button variant="contained" color="success" size="small" endIcon={<SaveIcon />} type="submit">
           SAVE
         </Button>
         {/* <button id="createbtn" type="submit" ><SaveIcon/></button> */}

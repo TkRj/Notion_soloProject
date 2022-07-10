@@ -1,6 +1,7 @@
 import "./sideView.css";
+import EditSharp from "@mui/icons-material/EditSharp";
 
-const sideViewDiv = ({ sideViewEntry}) => {
+const sideViewDiv = ({ sideViewEntry,editHandler}) => {
 
 
   let date = sideViewEntry.date.slice(8, 10);
@@ -30,14 +31,17 @@ const sideViewDiv = ({ sideViewEntry}) => {
   return (
     <div className="sideview-box">
       <div className="top">
-        <div>{date} {Months[month-1]} {year}</div>
+        <div>{date} {Months[month-1]} {year} {time}</div>
         <div className="filler"></div>
       </div>
         <div className="title">{sideViewEntry.title}</div>
 
       <div className="filler"></div>
       <div>{sideViewEntry.entry}</div>
+      <div className="edit-icon">
 
+
+      </div>
     </div>
   );
 };

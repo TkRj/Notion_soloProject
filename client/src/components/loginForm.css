@@ -1,0 +1,35 @@
+.buffer{
+/* border: solid; */
+min-height: 10px;
+}
+.logo{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-end;
+}
+input[type=submit]{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: aliceblue;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+}
+input[type=submit]:hover{
+  background-color: #333;
+  color: white;
+}
+.signupBtn{
+  border-radius: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+}

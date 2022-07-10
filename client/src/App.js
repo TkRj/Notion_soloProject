@@ -8,6 +8,9 @@ import AllEntries from "./components/allEntries";
 import SignupForm from "./components/signupForm";
 import LoginForm from "./components/loginForm";
 import Navbar from "./components/navbar";
+import SearchForm from "./components/searchForm";
+import KeyboardDoubleArrowUpSharpIcon from '@mui/icons-material/KeyboardDoubleArrowUpSharp';
+import KeyboardDoubleArrowDownSharpIcon from '@mui/icons-material/KeyboardDoubleArrowDownSharp';
 
 import { useState, useEffect } from "react";
 import {
@@ -22,12 +25,16 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [logging, setLogging] = useState(false);
   const [email, setEmail] = useState("");
+  const [sort,setSort]=useState(true);//flag to display newest entries first
 
   const [entries, setEntries] = useState([]);
   const [sideView, setSideView] = useState(false);
   const [sideViewEntry, setSideViewEntry] = useState(null);
   const [sideViewFav, setSideViewFav] = useState(false);
   const [sideViewFavEntry, setSideViewFavEntry] = useState(null);
+
+  const [editView,setEditView]=useState(false);
+  const [editViewEntry,setEditViewEntry]=useState(null);
 
   useEffect(() => {
     //if email exists
@@ -126,12 +133,27 @@ function App() {
     e.preventDefault();
     setLogging(false);
   }
+
+  function searchHandler(e){
+    e.preventDefault();
+    const year = e.target.year.value;
+    const month = e.target.months.value;
+    console.log(month, year);
+  }
+
   function sortHandler(e){
     e.preventDefault();
-
-    setEntries(entries.sort((a,b)=>{
-      return new Date(a.date) - new Date(b.date);
-    }))
+    if(sort){
+      setEntries(entries.sort((a,b)=>{
+        return new Date(a.date) - new Date(b.date);
+      }))
+      setSort(false);
+    }else{
+        setEntries(entries.sort((a,b)=>{
+        return new Date(b.date) - new Date(a.date);
+      }))
+      setSort(true);
+    }
   }
 
   if (logging) {
@@ -167,7 +189,9 @@ function App() {
             <Link to="/favourites">
               <SidebarButton name="Favourites" />
             </Link>
-            <button onClick={sortHandler}>Sort</button>
+          
+
+            {/* <SearchForm searchHandler={searchHandler}/> */}
           </div>
           <div>
             <Routes>
@@ -182,9 +206,16 @@ function App() {
                     entries={entries}
                     setEntries={setEntries}
                     sideView={sideView}
-                    setSideView={setSideView}
                     sideViewEntry={sideViewEntry}
+                    setSideView={setSideView}
                     setSideViewEntry={setSideViewEntry}
+                    setEditView={setEditView}
+                    editViewEntry={editViewEntry}
+                    setEditViewEntry={setEditViewEntry}
+                    sortHandler={sortHandler}
+                    sort={sort}
+
+
                   />
                 }
               ></Route>
@@ -194,6 +225,7 @@ function App() {
                   <Favourites
                     entries={entries}
                     setEntries={setEntries}
+                    sideViewEntry={sideViewEntry}
                     sideViewFav={sideViewFav}
                     setSideViewFav={setSideViewFav}
                     sideViewFavEntry={sideViewFavEntry}

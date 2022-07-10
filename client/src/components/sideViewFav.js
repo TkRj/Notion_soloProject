@@ -25,7 +25,7 @@ const sideViewFavDiv = ({ sideViewFavEntry}) => {
   return (
     <div className="sideview-box">
       <div className="top">
-        <div>{date} {Months[month-1]} {year}</div>
+        <div>{date} {Months[month-1]} {year} {time}</div>
         <div className="filler"></div>
       </div>
         <div className="title">{sideViewFavEntry.title}</div>

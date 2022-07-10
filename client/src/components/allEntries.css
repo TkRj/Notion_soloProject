@@ -13,5 +13,9 @@
   min-width: 29.5vw;
   max-width: 29.5vw;
 }
+.sortBtn{
+  cursor: pointer;
+  float:right;
+}
 
 

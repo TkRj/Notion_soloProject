@@ -6,25 +6,26 @@ import ShareIcon from "@mui/icons-material/Share";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
-
-import Backdrop from "@mui/material/Backdrop";
+import EditSharpIcon from "@mui/icons-material/EditSharp";
 
 const Entry = ({
   entry,
   entries,
   setEntries,
   setSideView,
+  sideViewEntry,
   setSideViewEntry,
   setSideViewFav,
   sideViewFavEntry,
   setSideViewFavEntry,
+  editView,
+  setEditView,
+  setEditViewEntry
 }) => {
-  // const [open, setOpen] = useState(false);
-
   let id = entry._id;
   let date = entry.date.slice(8, 10);
   let month = Number(entry.date.slice(5, 7));
-  let year = entry.date.slice(0, 4);
+  let year = entry.date.slice(2, 4);
   let time = entry.date.slice(11, 16);
   let hour = Number(time.slice(0, 2));
 
@@ -47,22 +48,22 @@ const Entry = ({
     promise
       .then((data) => {
         setEntries(data);
-        let favEntries=data.filter((entry) => entry.favourite === true);
-        if( favEntries.includes(sideViewFavEntry)===false) {
-          if(sideViewFavEntry===entry||favEntries.length===0) {
-          setSideViewFav(false);
+        let favEntries = data.filter((entry) => entry.favourite === true);
+        if (favEntries.includes(sideViewFavEntry) === false) {
+          if (sideViewFavEntry === entry || favEntries.length === 0) {
+            setSideViewFav(false);
+          }
         }
-  }})
+        if (data.includes(sideViewEntry) === false) {
+          if (sideViewEntry === entry || data.length === 0) {
+            setSideView(false);
+          }
+        }
+      })
       .catch((err) => {
         console.log("Update or delete error", err);
       });
   }
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-  // const handleToggle = () => {
-  //   setOpen(!open);
-  // };
 
   function sideViewHandler(e) {
     e.preventDefault();
@@ -75,6 +76,23 @@ const Entry = ({
       setSideViewEntry(entry);
     }
   }
+  function editHandler(e) {
+    e.preventDefault();
+    const id = entry._id;
+    console.log('entry',entry)
+    if(typeof setSideView==='function'){setSideView(false)}
+    else setSideViewFav(false)
+    setEditView(true);
+    setEditViewEntry(entry);
+    // if (typeof setSideViewEntry === "function") {
+    //   setSideViewEntry(entry);
+
+    // } else {
+    //   setSideViewFavEntry(entry);
+    // }
+
+
+  }
 
   return (
     <div className="entry-box">
@@ -82,27 +100,15 @@ const Entry = ({
         <div className="title-time-box" onClick={sideViewHandler}>
           <div>{entry.title}</div>
           <div>
-            {date} {Months[month - 1]}
+            {date} {Months[month - 1]} {year}
           </div>
         </div>
         <div className="entry-body">{entry.entry.substring(0, 35)} </div>
       </div>
 
-      {/* <div>
-        <Backdrop
-          sx={{ bgcolor:'black',padding:50,color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          children={date + " " + Months[month - 1] + " " + year+" "+entry.entry}
-          transitionDuration={500}
-          open={open}
-          onClick={handleClose}
-
-        >
-          <FullEntry entry={entry}/>
-        </Backdrop>
-      </div> */}
-
       <div className="icons-outerbox">
         <div className="icons-box">
+          {/* <EditSharpIcon cursor="pointer" onClick={editHandler} /> */}
           {!entry.favourite && (
             <div>
               <FavoriteBorderSharpIcon
@@ -126,7 +132,9 @@ const Entry = ({
           <div>
             <DeleteIcon
               onClick={(e) => {
-                updateEntries(deleteEntry(id));
+                // eslint-disable-next-line no-restricted-globals
+                let res = confirm("Are you sure you want to delete this?");
+                if (res) updateEntries(deleteEntry(id));
               }}
               cursor="pointer"
             />
